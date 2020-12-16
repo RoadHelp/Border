@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="2dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        >
+
+        <ImageView
+            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:padding="4dp"
+            android:id="@+id/imageBallView"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/titleImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imageBallView"
+            android:layout_weight="2"
+            android:paddingTop="7dp"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--<TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/descriptionImageView"
+            android:text="Description"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:layout_below="@id/titleImageView"
+            android:layout_toEndOf="@+id/imageBallView"
+            android:layout_weight="2"/>-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
