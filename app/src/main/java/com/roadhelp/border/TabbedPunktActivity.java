@@ -1,17 +1,20 @@
 package com.roadhelp.border;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.roadhelp.border.ui.main.SectionsPagerAdapter;
 
@@ -21,12 +24,19 @@ public class TabbedPunktActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_punkt);
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        TextView title = findViewById(R.id.title); //получаем из интента заголовок
+        Intent intent = getIntent();
+        if (intent != null){
+            title.setText(intent.getStringExtra("title")); // надо пропихнуть его в 3 фрагмент
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

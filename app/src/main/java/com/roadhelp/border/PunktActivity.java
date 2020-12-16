@@ -13,8 +13,8 @@ public class PunktActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punkt);
 
-        TextView title = findViewById(R.id.Title_textView);
-        TextView recipe = findViewById(R.id.Recipe_textView);
+        TextView title = findViewById(R.id.title_textView);
+        TextView recipe = findViewById(R.id.recipe_textView);
 
         Intent intent = getIntent();
         if (intent != null){
