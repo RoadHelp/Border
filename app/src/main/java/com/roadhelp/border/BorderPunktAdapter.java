@@ -66,11 +66,12 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
             int position = getAdapterPosition();
             BorderPunktItem borderPunktItem = borderPunktItems.get(position);
 
-            Intent intent = new Intent(context, PunktActivity.class);
-            intent.putExtra("imageResource", borderPunktItem.getImageRosource());
-            intent.putExtra("title", borderPunktItem.getTitle());
-            intent.putExtra("descr", borderPunktItem.getDescription());
-            intent.putExtra("recipe", borderPunktItem.getRecipe());
+
+            Intent intent = new Intent(context, TabbedPunktActivity.class);
+            //intent.putExtra("imageResource", borderPunktItem.getImageRosource());
+            //intent.putExtra("title", borderPunktItem.getTitle());
+            //intent.putExtra("descr", borderPunktItem.getDescription());
+            //intent.putExtra("recipe", borderPunktItem.getRecipe());
             context.startActivity(intent);
         }
     }

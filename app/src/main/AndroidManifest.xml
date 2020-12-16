@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PizzaRecipes">
+        <activity
+            android:name=".TabbedPunktActivity"
+            android:label="@string/title_activity_tabbed_punkt"
+            android:theme="@style/Theme.PizzaRecipes.NoActionBar"></activity>
         <activity android:name=".PunktActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
