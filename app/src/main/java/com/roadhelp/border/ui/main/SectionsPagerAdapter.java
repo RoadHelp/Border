@@ -15,11 +15,17 @@ import com.roadhelp.border.Fragment2;
 import com.roadhelp.border.Fragment3;
 import com.roadhelp.border.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+    private List<Fragment> fragments = new ArrayList<>();
+    private List<String> titles = new ArrayList<>();
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
@@ -42,10 +48,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new Fragment2();
                 break;
             case 2:
-                fragment = new Fragment3();
+                fragment = fragments.get(0);
                 break;
         }
         return fragment;
+
     }
 
     @Nullable
@@ -58,5 +65,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show 2 total pages.
         return 3;
+    }
+
+    public void addFragment(Fragment fragment) {
+        fragments.add(fragment);
+
     }
 }

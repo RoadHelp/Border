@@ -71,11 +71,10 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
 
             Intent intent = new Intent(context, TabbedPunktActivity.class);
 
-
             //intent.putExtra("imageResource", borderPunktItem.getImageRosource());
             intent.putExtra("title", borderPunktItem.getTitle());
             //intent.putExtra("descr", borderPunktItem.getDescription());
-            //intent.putExtra("recipe", borderPunktItem.getRecipe());
+            intent.putExtra("recipe", borderPunktItem.getRecipe());
             context.startActivity(intent);
         }
     }
