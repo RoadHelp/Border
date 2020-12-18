@@ -18,7 +18,7 @@
             android:layout_height="100dp"
             android:layout_width="0dp"
             android:padding="4dp"
-            android:id="@+id/imageBallView"
+            android:id="@+id/imagePunktView"
             android:layout_weight="1"/>
 
         <TextView

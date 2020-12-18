@@ -1,6 +1,5 @@
 package com.roadhelp.border;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Fragment3 extends Fragment {
+public class Fragment3PunktInfo extends Fragment {
 
-    public static Fragment3 newInstance(String id, String recipe) {
+    public static Fragment3PunktInfo newInstance(String title, String descr) {  // метод принимает 2 строки и запихивает их в bundle args и возвращает фрагмент
         Bundle args = new Bundle();
-        args.putString("ID", id);
-        args.putString("RECIPE", recipe);
+        args.putString("TITLE", title);
+        args.putString("DESCR", descr);
 
-        Fragment3 fragment3 = new Fragment3();
-        fragment3.setArguments(args);
-        return fragment3;
+        Fragment3PunktInfo fragment3PunktInfo = new Fragment3PunktInfo();
+        fragment3PunktInfo.setArguments(args);
+        return fragment3PunktInfo;
     }
 
     @Nullable
@@ -35,11 +34,12 @@ public class Fragment3 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String id = getArguments().getString("ID");
-        String recipe = getArguments().getString("RECIPE");
+        String id = getArguments().getString("TITLE");
+        String recipe = getArguments().getString("DESCR");
         TextView title = view.findViewById(R.id.title_textView);
         TextView recipeTextView = view.findViewById(R.id.recipe_textView);
         title.setText(id);
         recipeTextView.setText(recipe);
+
     }
 }

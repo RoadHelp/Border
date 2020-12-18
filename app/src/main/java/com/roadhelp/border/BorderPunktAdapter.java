@@ -35,7 +35,7 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
     @Override
     public void onBindViewHolder(@NonNull BorderViewHolder holder, int position) {
         BorderPunktItem borderPunktItem = borderPunktItems.get(position);
-        holder.pizzaImageView.setImageResource(borderPunktItem.getImageRosource());
+        holder.punktImageView.setImageResource(borderPunktItem.getImageRosource());
         holder.textView_title.setText(borderPunktItem.getTitle());
 //        holder.textView_description.setText(borderPunktItem.getDescription());
 
@@ -49,7 +49,7 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
 
     class BorderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView pizzaImageView;
+        public ImageView punktImageView;
         public TextView textView_title;
         public TextView textView_description;
 
@@ -57,7 +57,7 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
             super(itemView);
             itemView.setOnClickListener(this);
 
-            pizzaImageView = itemView.findViewById(R.id.imageBallView);
+            punktImageView = itemView.findViewById(R.id.imagePunktView);
             textView_title = itemView.findViewById(R.id.titleImageView);
 //            textView_description = itemView.findViewById(R.id.descriptionImageView);
         }
@@ -68,13 +68,12 @@ public class BorderPunktAdapter extends RecyclerView.Adapter<BorderPunktAdapter.
             int position = getAdapterPosition();
             BorderPunktItem borderPunktItem = borderPunktItems.get(position);
 
-
             Intent intent = new Intent(context, TabbedPunktActivity.class);
 
             //intent.putExtra("imageResource", borderPunktItem.getImageRosource());
-            intent.putExtra("title", borderPunktItem.getTitle());
-            //intent.putExtra("descr", borderPunktItem.getDescription());
-            intent.putExtra("recipe", borderPunktItem.getRecipe());
+            intent.putExtra("title", borderPunktItem.getTitle());       //передаём title в интент в TabbedPunktActivity
+            intent.putExtra("descr", borderPunktItem.getDescription());
+            //intent.putExtra("recipe", borderPunktItem.getRecipe());
             context.startActivity(intent);
         }
     }

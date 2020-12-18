@@ -7,13 +7,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,17 +22,19 @@ public class TabbedPunktActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_punkt);
 
-        TextView title = findViewById(R.id.title); //получаем из интента заголовок
+        TextView title = findViewById(R.id.title); //получаем из интента title, который пришёл из BorderPunktAdapter
         Intent intent = getIntent();
         if (intent != null){
-            title.setText(intent.getStringExtra("title")); // надо пропихнуть его в 3 фрагмент
+            title.setText(intent.getStringExtra("title")); // устанавливаем в заголовок TabbedPunktActivity
         }
 
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
 
-        sectionsPagerAdapter.addFragment(Fragment3.newInstance(intent.getStringExtra("title"), intent.getStringExtra("recipe")));
+        // прмиеняем самописную функцию addFragment в PagerAdapter.
+        // вызывая метод newInstance который находиться в классе фрагмента
+        sectionsPagerAdapter.addFragment(Fragment3PunktInfo.newInstance(intent.getStringExtra("title"), intent.getStringExtra("descr")));
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);

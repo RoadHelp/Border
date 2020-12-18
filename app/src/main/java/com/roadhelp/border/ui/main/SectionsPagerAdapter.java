@@ -1,8 +1,6 @@
 package com.roadhelp.border.ui.main;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -12,7 +10,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.roadhelp.border.Fragment1;
 import com.roadhelp.border.Fragment2;
-import com.roadhelp.border.Fragment3;
 import com.roadhelp.border.R;
 
 import java.util.ArrayList;
@@ -25,7 +22,6 @@ import java.util.List;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments = new ArrayList<>();
-    private List<String> titles = new ArrayList<>();
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
@@ -48,6 +44,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new Fragment2();
                 break;
             case 2:
+                // так не надо делать, надо исправить когда появится чат и камеры.
+                // при выборе 3 вкладки берётся 0 фрагмент из массива fragments, который мы добавили методом addFragment
                 fragment = fragments.get(0);
                 break;
         }
