@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "547843222003",
+    "project_id": "borderchat-b5957",
+    "storage_bucket": "borderchat-b5957.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547843222003:android:83e1e7a864efb9fc594a86",
+        "android_client_info": {
+          "package_name": "com.roadhelp.border"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547843222003-h1u2eiulqh5pmi0fdoac2fhk17a28jrp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roadhelp.border",
+            "certificate_hash": "9e8ffc0f13d34749f6bb44820852e6f2cab6fd00"
+          }
+        },
+        {
+          "client_id": "547843222003-gru9vhi0d51ntonvls62ii84fro0vmfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZGG-Ey5ms8nrfjEMaPE2wOfa2r7dy1Fs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547843222003-gru9vhi0d51ntonvls62ii84fro0vmfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

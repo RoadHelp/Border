@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,10 +18,13 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         ArrayList<com.roadhelp.border.BorderPunktItem> borderPunktItems = new ArrayList<BorderPunktItem>();
         borderPunktItems.add(new BorderPunktItem(R.drawable.bagrat, Utils.TITLE_1, Utils.DESCR_1, Utils.RECIPE_1));
