@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Border</string>
     <string name="title_activity_tabbed_punkt">TabbedPunktActivity</string>
-    <string name="tab_text_1">Chats</string>
+    <string name="tab_text_1">Chat</string>
     <string name="tab_text_2">Cameras</string>
     <string name="tab_text_3">Info</string>
 </resources>

@@ -33,6 +33,7 @@ public class TabbedPunktActivity extends AppCompatActivity {
         // вызывая метод newInstance который находиться в классе фрагмента
         sectionsPagerAdapter.addFragment(Fragment3PunktInfo.newInstance(intent.getStringExtra("title"), intent.getStringExtra("descr")));
         sectionsPagerAdapter.addFragment(Fragment1Chat.newInstance(intent.getStringExtra("title")));
+        sectionsPagerAdapter.addFragment(Fragment2.newInstance(intent.getStringExtra("cameraUrl")));
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);

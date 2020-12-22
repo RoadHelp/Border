@@ -41,7 +41,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = fragments.get(1);
                 break;
             case 1:
-                fragment = new Fragment2();
+                fragment =fragments.get(2);
                 break;
             case 2:
                 // так не надо делать, надо исправить когда появится чат и камеры.

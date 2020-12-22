@@ -27,15 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<com.roadhelp.border.BorderPunktItem> borderPunktItems = new ArrayList<BorderPunktItem>();
-        borderPunktItems.add(new BorderPunktItem(R.drawable.bagrat, Utils.TITLE_1, Utils.DESCR_1, Utils.RECIPE_1));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.branevo, Utils.TITLE_2, Utils.DESCR_2, Utils.RECIPE_2));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.goldap, Utils.TITLE_3, Utils.DESCR_3, Utils.RECIPE_3));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.gzhehotki, Utils.TITLE_4, Utils.DESCR_4, Utils.RECIPE_4));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.bagrat, Utils.TITLE_1, Utils.DESCR_1, Utils.CAMERA_URL_1));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.branevo, Utils.TITLE_2, Utils.DESCR_2, Utils.CAMERA_URL_2));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.goldap, Utils.TITLE_3, Utils.DESCR_3, Utils.CAMERA_URL_3));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.gzhehotki, Utils.TITLE_4, Utils.DESCR_4, Utils.CAMERA_URL_4));
 
-        borderPunktItems.add(new BorderPunktItem(R.drawable.sovetsk, Utils.TITLE_5, Utils.DESCR_5, Utils.RECIPE_5));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.morskoe, Utils.TITLE_6, Utils.DESCR_6, Utils.RECIPE_6));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.pogranich, Utils.TITLE_7, Utils.DESCR_7, Utils.RECIPE_7));
-        borderPunktItems.add(new BorderPunktItem(R.drawable.nesterov, Utils.TITLE_8, Utils.DESCR_8, Utils.RECIPE_8));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.sovetsk, Utils.TITLE_5, Utils.DESCR_5, Utils.CAMERA_URL_5));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.morskoe, Utils.TITLE_6, Utils.DESCR_6, Utils.CAMERA_URL_6));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.pogranich, Utils.TITLE_7, Utils.DESCR_7, Utils.CAMERA_URL_7));
+        borderPunktItems.add(new BorderPunktItem(R.drawable.nesterov, Utils.TITLE_8, Utils.DESCR_8, Utils.CAMERA_URL_8));
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

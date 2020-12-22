@@ -5,13 +5,13 @@ public class BorderPunktItem {
     private int imageRosource;
     private String title;
     private String description;
-    private String recipe;
+    private String cameraUrl;
 
-    public BorderPunktItem(int imageRosource, String title, String description, String recipe) {
+    public BorderPunktItem(int imageRosource, String title, String description, String cameraUrl) {
         this.imageRosource = imageRosource;
         this.title = title;
         this.description = description;
-        this.recipe = recipe;
+        this.cameraUrl = cameraUrl;
     }
 
 
@@ -23,8 +23,8 @@ public class BorderPunktItem {
         return title;
     }
 
-    public String getRecipe() {
-        return recipe;
+    public String getCameraUrl() {
+        return cameraUrl;
     }
 
     public String getDescription() {

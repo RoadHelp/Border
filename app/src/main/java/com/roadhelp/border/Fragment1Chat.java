@@ -100,9 +100,11 @@ public class Fragment1Chat extends Fragment {
         chatImagesStorageReference = storage.getReference().child("chat_images");
 
         messageListView = view.findViewById(R.id.messageListView);
+
         messageChats = new ArrayList<>(); //создаёт массив объектов класса MessageChat
         messageAdapter = new MessageAdapter(getContext(), R.layout.message_item, messageChats);
         messageListView.setAdapter(messageAdapter);
+
 
 
 
@@ -158,6 +160,7 @@ public class Fragment1Chat extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 MessageChat messageChat = snapshot.getValue(MessageChat.class);
                 messageAdapter.add(messageChat);
+
             }
 
             @Override
@@ -180,7 +183,6 @@ public class Fragment1Chat extends Fragment {
 
             }
         };
-
         messagesDatabaseReference.addChildEventListener(messagesChildEventListener);
 
 
