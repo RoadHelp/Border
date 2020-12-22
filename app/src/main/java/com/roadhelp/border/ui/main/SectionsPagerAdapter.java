@@ -67,6 +67,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void addFragment(Fragment fragment) {
+
         fragments.add(fragment);
     }
 }

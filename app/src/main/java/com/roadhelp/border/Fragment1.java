@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class Fragment1 extends Fragment {
     private EditText messageEditText;
 
     private String userName;
+    List<MessageChat> messageChats;
 
 
     FirebaseDatabase database;
@@ -81,8 +83,9 @@ public class Fragment1 extends Fragment {
         messageEditText = view.findViewById(R.id.editMessageText);
 
         messageListView = view.findViewById(R.id.messageListView);
-        List<MessageChat> messageChats = new ArrayList<>(); //создаёт массив объектов класса MessageChat
-
+        messageChats = new ArrayList<>(); //создаёт массив объектов класса MessageChat
+        messageAdapter = new MessageAdapter(getContext(), R.layout.message_item, messageChats);
+        messageListView.setAdapter(messageAdapter);
 
 
 
@@ -113,19 +116,16 @@ public class Fragment1 extends Fragment {
 
 
 
-
-
-
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                MessageChat messageChat = new MessageChat();
-                messageChat.setText(messageEditText.getText().toString());
-                messageChat.setName(userName);
-                messageChat.setImageUrl(null);
+                MessageChat messageChat1 = new MessageChat();
+                messageChat1.setText(messageEditText.getText().toString());
+                messageChat1.setName(userName);
+                messageChat1.setImageUrl(null);
 
-                messagesDatabaseReference.push().setValue(messageChat);
+                messagesDatabaseReference.push().setValue(messageChat1);
 
                 messageEditText.setText("");
 
@@ -143,12 +143,6 @@ public class Fragment1 extends Fragment {
         messagesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                //адаптер связывает массив объектов класса и слой разметки message_item
-                //именно создание адаптера и установка вне onChildAdded создавали дубликаты сообщений, на решение проблемы убил много времени
-                messageAdapter = new MessageAdapter(getContext(), R.layout.message_item, messageChats);
-                messageListView.setAdapter(messageAdapter);
-
-
                 MessageChat messageChat = snapshot.getValue(MessageChat.class);
                 messageAdapter.add(messageChat);
             }
@@ -176,4 +170,13 @@ public class Fragment1 extends Fragment {
 
         messagesDatabaseReference.addChildEventListener(messagesChildEventListener);
     }
+
+
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        messagesDatabaseReference.removeEventListener(messagesChildEventListener); //причина всех бед)) надо отвязыать листенер, потому что создаётся постоянно новый. изучай lifecycle fragment
+    }
+
+
 }
