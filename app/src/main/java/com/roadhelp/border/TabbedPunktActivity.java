@@ -35,6 +35,7 @@ public class TabbedPunktActivity extends AppCompatActivity {
         // прмиеняем самописную функцию addFragment в PagerAdapter.
         // вызывая метод newInstance который находиться в классе фрагмента
         sectionsPagerAdapter.addFragment(Fragment3PunktInfo.newInstance(intent.getStringExtra("title"), intent.getStringExtra("descr")));
+        sectionsPagerAdapter.addFragment(Fragment1.newInstance(intent.getStringExtra("title")));
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);

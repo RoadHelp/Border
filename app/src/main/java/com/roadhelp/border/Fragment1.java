@@ -43,6 +43,17 @@ public class Fragment1 extends Fragment {
     DatabaseReference messagesDatabaseReference;
     ChildEventListener messagesChildEventListener;
 
+
+    public static Fragment1 newInstance(String title) {  // метод принимает 2 строки и запихивает их в bundle args и возвращает фрагмент
+        Bundle args = new Bundle();
+        args.putString("TITLE", title);
+
+
+        Fragment1 fragment1 = new Fragment1();
+        fragment1.setArguments(args);
+        return fragment1;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,9 +66,11 @@ public class Fragment1 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String title = getArguments().getString("TITLE");
+
         FirebaseApp.initializeApp(getContext());
         database = FirebaseDatabase.getInstance();
-        messagesDatabaseReference = database.getReference().child("messages");
+        messagesDatabaseReference = database.getReference().child(title);
 
         userName = "Default user";//
 
