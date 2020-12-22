@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.roadhelp.border.Fragment1;
 import com.roadhelp.border.Fragment2;
 import com.roadhelp.border.R;
 
@@ -38,7 +37,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                //fragment = new Fragment1();
+                //fragment = new Fragment1Chat();
                 fragment = fragments.get(1);
                 break;
             case 1:

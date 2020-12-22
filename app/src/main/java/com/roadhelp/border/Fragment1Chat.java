@@ -1,10 +1,11 @@
 package com.roadhelp.border;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +19,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment1 extends Fragment {
+import static android.app.Activity.RESULT_OK;
+
+public class Fragment1Chat extends Fragment {
 
     private ListView messageListView;
     private MessageAdapter messageAdapter;
@@ -36,6 +45,8 @@ public class Fragment1 extends Fragment {
     private ImageButton sendImageButton;
     private Button sendMessageButton;
     private EditText messageEditText;
+    private static final int RC_IAMGE_PICKER = 123;
+
 
     private String userName;
     List<MessageChat> messageChats;
@@ -45,15 +56,18 @@ public class Fragment1 extends Fragment {
     DatabaseReference messagesDatabaseReference;
     ChildEventListener messagesChildEventListener;
 
+    private FirebaseStorage storage;
+    private StorageReference chatImagesStorageReference;
 
-    public static Fragment1 newInstance(String title) {  // метод принимает 2 строки и запихивает их в bundle args и возвращает фрагмент
+
+    public static Fragment1Chat newInstance(String title) {  // метод принимает 1 строку и запихивает их в bundle args и возвращает фрагмент
         Bundle args = new Bundle();
         args.putString("TITLE", title);
 
 
-        Fragment1 fragment1 = new Fragment1();
-        fragment1.setArguments(args);
-        return fragment1;
+        Fragment1Chat fragment1Chat = new Fragment1Chat();
+        fragment1Chat.setArguments(args);
+        return fragment1Chat;
     }
 
     @Nullable
@@ -81,6 +95,9 @@ public class Fragment1 extends Fragment {
         sendImageButton = view.findViewById(R.id.sendPhotoButton);
         sendMessageButton = view.findViewById(R.id.sendMessageButtom);
         messageEditText = view.findViewById(R.id.editMessageText);
+
+        storage = FirebaseStorage.getInstance();
+        chatImagesStorageReference = storage.getReference().child("chat_images");
 
         messageListView = view.findViewById(R.id.messageListView);
         messageChats = new ArrayList<>(); //создаёт массив объектов класса MessageChat
@@ -132,12 +149,8 @@ public class Fragment1 extends Fragment {
             }
         });
 
-        sendImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+
 
 
         messagesChildEventListener = new ChildEventListener() {
@@ -169,14 +182,70 @@ public class Fragment1 extends Fragment {
         };
 
         messagesDatabaseReference.addChildEventListener(messagesChildEventListener);
+
+
+        sendImageButton = view.findViewById(R.id.sendPhotoButton);
+
+        sendImageButton.setOnClickListener(new View.OnClickListener() { // в случае клика по изображению вместо send
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(Intent.ACTION_GET_CONTENT);
+                intent1.setType("image/*");
+                intent1.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent1, "Choose an image"), RC_IAMGE_PICKER);
+
+            }
+        });
+
+
+
     }
 
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) { // когда выбрана картинка
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_IAMGE_PICKER && resultCode == RESULT_OK){
+            Uri selectedImageUri = data.getData(); // получаем uri картинки из data
+            final StorageReference imageReference = chatImagesStorageReference.child(selectedImageUri.getLastPathSegment());
+            UploadTask uploadTask;
+            uploadTask = imageReference.putFile(selectedImageUri); // загружаем картинку на Firebase Storage
 
+            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return imageReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult(); // скачиваем картинку с Firebase Storage
+                        MessageChat message = new MessageChat();    //создаём объект класса со ссылкой на картинку
+                        message.setImageUrl(downloadUri.toString());
+                        message.setName(userName);
+                        messagesDatabaseReference.push().setValue(message);
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
+                }
+            });
+
+        }
+    }
 
     public void onDestroyView() {
         super.onDestroyView();
         messagesDatabaseReference.removeEventListener(messagesChildEventListener); //причина всех бед)) надо отвязыать листенер, потому что создаётся постоянно новый. изучай lifecycle fragment
     }
+
+
+
 
 
 }

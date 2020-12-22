@@ -3,14 +3,11 @@ package com.roadhelp.border;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.roadhelp.border.ui.main.SectionsPagerAdapter;
@@ -35,7 +32,7 @@ public class TabbedPunktActivity extends AppCompatActivity {
         // прмиеняем самописную функцию addFragment в PagerAdapter.
         // вызывая метод newInstance который находиться в классе фрагмента
         sectionsPagerAdapter.addFragment(Fragment3PunktInfo.newInstance(intent.getStringExtra("title"), intent.getStringExtra("descr")));
-        sectionsPagerAdapter.addFragment(Fragment1.newInstance(intent.getStringExtra("title")));
+        sectionsPagerAdapter.addFragment(Fragment1Chat.newInstance(intent.getStringExtra("title")));
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabs = findViewById(R.id.tabs);
