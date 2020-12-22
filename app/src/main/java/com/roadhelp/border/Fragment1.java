@@ -69,8 +69,10 @@ public class Fragment1 extends Fragment {
 
         messageListView = view.findViewById(R.id.messageListView);
         List<MessageChat> messageChats = new ArrayList<>(); //создаёт массив объектов класса MessageChat
-        messageAdapter = new MessageAdapter(getContext(), R.layout.message_item, messageChats); //адаптер связывает массив объектов класса и слой разметки message_item
-        messageListView.setAdapter(messageAdapter);
+
+
+
+
 
         progressBar.setVisibility(ProgressBar.INVISIBLE);
 
@@ -128,6 +130,12 @@ public class Fragment1 extends Fragment {
         messagesChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                //адаптер связывает массив объектов класса и слой разметки message_item
+                //именно создание адаптера и установка вне onChildAdded создавали дубликаты сообщений, на решение проблемы убил много времени
+                messageAdapter = new MessageAdapter(getContext(), R.layout.message_item, messageChats);
+                messageListView.setAdapter(messageAdapter);
+
+
                 MessageChat messageChat = snapshot.getValue(MessageChat.class);
                 messageAdapter.add(messageChat);
             }
